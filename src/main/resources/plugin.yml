@@ -1,0 +1,8 @@
+name: FastVanish
+version: '1.0'
+main: me.cyro.fastVanish.FastVanish
+api-version: '1.21'
+commands:
+  vanish:
+    aliases: ['v']
+    permission: vanish.vanish
