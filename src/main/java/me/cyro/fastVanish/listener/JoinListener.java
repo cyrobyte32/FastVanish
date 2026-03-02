@@ -20,26 +20,33 @@ public class JoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player t = e.getPlayer();
 
-        if(!t.hasPermission("vanish.see")) {
-
-            // List of vanished players
-            List<Player> vanishedPlayers = new ArrayList<>();
-
+        // Hide all players that are in vanish and they cant see
+        if(!t.hasPermission("fastvanish.see")) {
             for(Player p : Bukkit.getOnlinePlayers()) {
+
                 if(isVanish(p)) {
                     t.hidePlayer(FastVanish.getPlugin(), p);
                 }
+
             }
+        }
 
-
-
+        // Hide them if THEY are in vanish
+        if(isVanish(t)) {
+            for(Player p : Bukkit.getOnlinePlayers()) {
+                if(!p.hasPermission("fastvanish.see")) {
+                    p.hidePlayer(FastVanish.getPlugin(), t);
+                }
+            }
         }
 
     }
 
     private boolean isVanish(Player p) {
         return p.getPersistentDataContainer().getOrDefault(
-                new NamespacedKey(FastVanish.getPlugin(), "isVanish"),
+                new NamespacedKey(
+                        FastVanish.getPlugin(),
+                        "isVanish"),
                 PersistentDataType.BOOLEAN,
                 false
         );

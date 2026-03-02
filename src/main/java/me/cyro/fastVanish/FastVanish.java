@@ -45,7 +45,7 @@ public final class FastVanish extends JavaPlugin {
         // p = player to vanish.
         // permission fastvanish.see allows to bypass invisibility.
         for(Player t : Bukkit.getOnlinePlayers()) {
-            t.showPlayer(this, p);
+            t.showPlayer(p);
         }
     }
 
